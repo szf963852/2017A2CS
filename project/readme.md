@@ -1,0 +1,1 @@
+### I am in the group with Kevin Chen.The link to his project is <https://github.com/chenkewei99/2017A2CS/tree/master/Christmas%20project>
