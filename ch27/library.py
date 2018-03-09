@@ -6,6 +6,7 @@ class LibraryItem:
         self.ItemID = i
         self.OnLoan = False
         self.DueDate = datetime.date.today()
+        self.BorrowerID = 0
 
     def GetTitle (self):
         return (self. Title)
@@ -13,9 +14,11 @@ class LibraryItem:
     def Borrowing(self):
         self.OnLoan = True
         self.DueDate = self.DueDate + datetime.timedelta(weeks=3)
+        self.__BorrowerID = b
 
     def Returning(self):
         self.OnLoan = False
+        self.__BorrowerID = 0
 
     def PrintDetails(self):
         print(self.Title, '; ',self.AuthorArtist,";",end= "")
@@ -30,8 +33,9 @@ class Book(LibraryItem):
     def GetisRequested(self):
         return (self. IsRequested)
 
-    def SetisRequested(self):
+    def SetisRequested(self,r):
         self.IsRequested = True
+        self.RequestedBy = r
 
     def PrintDetails(self):
         print("Book Deatails")
@@ -89,5 +93,18 @@ class Borrower():
         print("ID : ", self.BorrowerID)
         print("email : ", self.Emailaddress)  
         print("Items on loan: ", self.OnLoan)
+
+
+def DisplayMenu():
+    print('1-Add a new borrower')
+    print('2-Add a new book')
+    print('3-Add a new CD')
+    print('4-Borrow book')
+    print('5-Return book')
+    print('6-Borrow CD')
+    print('7-Return CD')
+    print('8-Request book')
+    print('9-Print all details')
+    print('99-Exit program')
 
 
