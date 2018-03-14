@@ -11,14 +11,18 @@ class LibraryItem:
     def GetTitle (self):
         return (self. Title)
 
-    def Borrowing(self):
-        self.OnLoan = True
-        self.DueDate = self.DueDate + datetime.timedelta(weeks=3)
-        self.__BorrowerID = b
+    def Borrowing(self, i, x):
+        if x.getItemsOnLoan() < 5:
+            self.__OnLoan = True
+            self.__BorrowerID = x.getBorrowerID()
+            self.__DueDate = self.__DueDate + datetime.timedelta(weeks=3)
+            x.updateItemsOnLoan(1)
+        else:
+            print("too many books on loan")
 
-    def Returning(self):
-        self.OnLoan = False
-        self.__BorrowerID = 0
+    def Returning(self, i, x):
+        self.__OnLoan = False
+        x.updateItemsOnLoan(-1)
 
     def PrintDetails(self):
         print(self.Title, '; ',self.AuthorArtist,";",end= "")
@@ -89,9 +93,9 @@ class Borrower():
         self.OnLoan += n
 
     def PrintDetails(self):
-        print("Borrower : ", self.Name)
-        print("ID : ", self.BorrowerID)
-        print("email : ", self.Emailaddress)  
+        print("BorrowerName : ", self.Name)
+        print("BorrowerID : ", self.BorrowerID)
+        print("Emailaddress : ", self.Emailaddress)
         print("Items on loan: ", self.OnLoan)
 
 
@@ -106,5 +110,64 @@ def DisplayMenu():
     print('8-Request book')
     print('9-Print all details')
     print('99-Exit program')
+
+
+Finish = False
+NextBorrowerID = 1
+NextBookID = 1
+NextCD_ID = 1
+while Finish == False:
+    DisplayMenu()
+    MenuChoice = int(input())
+    if MenuChoice == 1: # new borrower
+        BName = input("Name: ")
+        Email = input("email address: ")
+        BorrowerID = NextBorrowerID
+        NextBorrowerID = NextBorrowerID + 1
+        Borrower = Borrower(BName, Email, BorrowerID)
+    elif MenuChoice == 2: # new book
+        Title = input("Title: ")
+        Author = input("Author: ")
+        ItemID = NextBookID
+        NextBookID = NextBookID + 1
+        Book = Book(Title, Author, ItemID)
+    elif MenuChoice == 3: # new CD
+        Title = input("Title: ")
+        Artist = input("Artist: ")
+        ItemID = NextCD_ID
+        NextCD_ID = NextCD_ID + 1
+        CD = CD(Title, Artist, ItemID)
+    elif MenuChoice == 4: # borrow book
+        BorrowerID = input("Borrower ID: ")
+        ItemID = input("Book ID: ")
+        Book.Borrowing(ItemID, Borrower)
+    elif MenuChoice == 5: # return book
+        BorrowerID = input("Borrower ID: ")
+        ItemID = input("Book ID: ")
+        Book.Returning(ItemID, Borrower)
+    elif MenuChoice == 6:  # borrow CD
+        BorrowerID = input("Borrower ID: ")
+        ItemID = input("CD ID: ")
+        CD.Borrowing(ItemID, Borrower)
+    elif MenuChoice == 7:  # return CD
+        BorrowerID = input("Borrower ID: ")
+        ItemID = input("CD ID: ")
+        CD.Returning(ItemID, Borrower)
+    elif MenuChoice == 8:  # request book
+        BorrowerID = input("Borrower ID: ")
+        ItemID = input("Book ID: ")
+        Book.RequestBook(ItemID, Borrower)
+    elif MenuChoice == 9:  # print all details
+        print("Borrower Details")
+        Borrower.printDetails()
+        print("Book Details")
+        Book.printDetails()
+        print("CD Details")
+        CD.printDetails()
+    elif MenuChoice == 99:  # end program
+        Finish = True
+    else:
+        print("wrong input")
+        input()
 
 
