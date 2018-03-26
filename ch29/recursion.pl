@@ -27,4 +27,26 @@ bunnyEars(0,0).
 bunnyEars(N,F):-
 	M is N - 1,
 	bunnyEars(M,X),
-	F is X+2.
+	A is M mod 2,
+	F is X+2+A.
+
+triangle(0,0).
+triangle(1,1).
+triangle(X,Y):-
+	Z is X-1,
+	triangle(Z,T),
+	Y is T+X.
+
+sumdigits(0,0).
+sumdigits(X,Y):-
+	Z is X//10,
+	sumdigits(Z,S),
+	L is X mod 10,
+	Y is S+L.
+
+count7(0,0).
+count7(X,Y):-
+	Z is X//10,
+	B is X mod 10,
+	count7(Z,S),
+	Y is S+B//7-B//8.
