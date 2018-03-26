@@ -5,26 +5,26 @@ TOY:
 |Attributes        | Functions|
 |-|-|
 |toy|constructor()|
-|Name              | getname( )/setname( )|
-|ID                    | getID( )/setID( )|
-|Price               | getPrice( )/setPrice( )|
-|Minimum age  | getMinimumage( )/setMinimumage( )|
+|Name(string) | getname( )/setname( )|
+|ID(string)             | getID( )/setID( )|
+|Price(real)              | getPrice( )/setPrice( )|
+|Minimum age(integer) | getMinimumage( )/setMinimumage( )|
 
 ComputerGame:
 Attributes        | Functions
 |-|-|
 |computer game|constructor()|
-Category         | getcategory( )/setcategory( )
-Console          | getconsole( )/setconsole( )
+Category(string)         | getcategory( )/setcategory( )
+Console(string)       | getconsole( )/setconsole( )
 
 Vehicle
 Attributes        | Functions
 |-|-|
 |vehicle|constructor()|
-Type                | gettype( )/settype( )
-Height             | getheight( )/setheight( )
-Length             | getlength( )/setlength( )
-Weight             | getweight( )/setweight( )
+Type (string)             | gettype( )/settype( )
+Height (integer)           | getheight( )/setheight( )
+Length (interger)            | getlength( )/setlength( )
+Weight  (weight)           | getweight( )/setweight( )
 
 #### 2.2
 inheritence means that one class's parameters is directly passed down to its subclasses
@@ -35,54 +35,94 @@ In the last example, computergame and vehicle are the subclasses of toy.
 ```python
     class toy:
         def __init__(self,n,i,p,m):
-            self.name=n
-            self.id=i
-            self.price=p
-            self.minimumage=m
+            self._name=n
+            self._id=i
+            self._price=p
+            self._minimumage=m
         
         def getname(self):
-            return self.name
+            return self._name
             
         def setname(self,name):
-            self.name=name
+            self._name=name
             
         def getid(self):
-            return self.id
+            return self._id
         
         def setid(self,id):
-            self.id=id
+            self._id=id
         
         def getprice(self):
-            return self.price
+            return self._price
             
         def setprice(self):
-            self.price=price
+            self._price=price
         
         def getminimumage(self):
-            return self.minimumage
+            return self._minimumage
        
        def setminimumage(self,min):
-            self.minimumage=mim
+            self._minimumage=mim
 ```
         
 #### 2.4
-```python 
+```python
+    class computergame(toy):
+	def__init__(self,n,i,p,m,c,o):
+            toy.__init__(self,n,i,p,m)
+            self._category=c
+            self._console=o
+            
+	def getcategory(self):
+	    return self._category
+	
+	def setcategory(self,c):
+	    self._catrgory=c
+	
+	def getconsole(self):
+	    return self._console
+	
+	def setconsole(self,o):
+	    self._console=o
+	
+
     class vehicle(toy):
         def__init__(self,n,i,p,m,t,h,l,w):
             toy.__init__(self,n,i,p,m)
             self.type=t
-            self.height=h
-            self.weight=w
-            self.length=l
+            self._height=h
+            self._weight=w
+            self._length=l
+
+	def gettype(self):
+	    return self._type
+	
+	def setcontype(self,o):
+	    self._type=o
+
+	def getlength(self):
+	    return self._length
+	
+	def setlength(self,o):
+	    self._length=o
+   
 ```    
             
 #### 2.5
 ```python
     try:
         if age>0 and age<18:
-            self.age=age
+            self.__age=age
         else:
             age=input('please input again')
+
+    class toy:
+	def __init__(self,n,i,p,m):
+	    toy.setname(self,n)
+	    toy.setid(self,i)
+	    toy.setprice(self, p)
+	    toy.setminage(self,m)
+	    
 ```
 
 #### 2.6
@@ -90,6 +130,7 @@ In the last example, computergame and vehicle are the subclasses of toy.
     vehicle=[ ]
     computergame=[ ]
     vehicle.append('Red Sports Car','RSC13',15.00,6,'car',3.3,12.1,0.08)
+    vehicle.append('14d','L4D01',10,15,'FPS','PC')
 ```
 
 #### 2.7
